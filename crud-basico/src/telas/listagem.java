@@ -5,6 +5,7 @@
  */
 package telas;
 
+import bd.bd;
 import classes.pessoa;
 import java.util.ArrayList;
 
@@ -20,12 +21,15 @@ public class listagem extends javax.swing.JFrame {
      */
     public listagem() {
         initComponents();
+        ListarPessoas();
     }
     public void ListarPessoas(){
+        bd banco = new bd();
+        listadepessoa = banco.readAll();
         getTextlistapessoas().setText("");
         for (int i = 0; i < getListadepessoa().size(); i++) {
             getTextlistapessoas().setText(getTextlistapessoas().getText() + 
-                 i + " " + getListadepessoa().get(i).MostrarDados() + "\n" );   
+                   " " + getListadepessoa().get(i).MostrarDados() + "\n" );   
         }
 }
     
@@ -159,9 +163,10 @@ public class listagem extends javax.swing.JFrame {
 
     private void butaodeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaodeletarActionPerformed
         // TODO add your handling code here:
-        listadepessoa.remove(Integer.parseInt(textIdDelete.getText()));
-        
+        bd banco = new bd();
+        banco.delete(Integer.parseInt(textIdDelete.getText()));
         ListarPessoas();
+        
     }//GEN-LAST:event_butaodeletarActionPerformed
 
     /**

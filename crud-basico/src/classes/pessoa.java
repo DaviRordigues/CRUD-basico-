@@ -14,14 +14,15 @@ public class pessoa {
     private String nome;
      private int  idade;
     private String cpf;
-
+private int id;
 
     public pessoa() {}
     
-    public pessoa(String nome, int idade,String cpf){
+    public pessoa(String nome, int idade,String cpf,int id){
     this.nome = nome;
     this.idade = idade;
     this.cpf = cpf;
+    this.id = id;
 
     }
 
@@ -68,8 +69,22 @@ public class pessoa {
     }
     
     public String MostrarDados(){
-        return "nome: " + getNome() + ", Idade: " + getIdade() + ", cpf:  " + getCpf();  
+        return "id" +getId()+ ", nome: " + getNome() + ", Idade: " + getIdade() + ", cpf:  " + getCpf();  
     
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
     
 }

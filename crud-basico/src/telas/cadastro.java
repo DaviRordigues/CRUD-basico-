@@ -5,6 +5,7 @@
  */
 package telas;
 
+import bd.bd;
 import classes.pessoa;
 
 /**
@@ -117,7 +118,8 @@ public class cadastro extends javax.swing.JFrame {
        pessoinha.setCpf(textCPF.getText());
 
         telaLista.setVisible(true);
-        telaLista.cadastrarpessoas(pessoinha);
+        bd banco = new bd();
+        banco.create(pessoinha);
         telaLista.ListarPessoas();
         
        dispose();

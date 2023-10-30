@@ -5,6 +5,9 @@
  */
 package telas;
 
+import bd.bd;
+import classes.pessoa;
+
 /**
  *
  * @author dbezerra
@@ -50,6 +53,8 @@ public class atualizar extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         botaoatualizar = new javax.swing.JButton();
         combopessoa = new javax.swing.JComboBox<>();
+        textid = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -74,28 +79,39 @@ public class atualizar extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("id");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(botaoatualizar)
-                .addGap(149, 149, 149))
             .addGroup(layout.createSequentialGroup()
                 .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(combopessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(textNome)
-                        .addComponent(textIdade)
-                        .addComponent(textCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(botaoatualizar)
+                                .addGap(174, 174, 174))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(64, 64, 64)
+                                .addComponent(textid)
+                                .addContainerGap())))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(combopessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(textNome)
+                                .addComponent(textIdade)
+                                .addComponent(textCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)))
+                        .addGap(25, 25, 25))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,7 +130,11 @@ public class atualizar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(textCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botaoatualizar)
                 .addContainerGap(43, Short.MAX_VALUE))
         );
@@ -127,13 +147,17 @@ public class atualizar extends javax.swing.JFrame {
      String nome = textNome.getText();
      int idade = Integer.parseInt( textIdade.getText());
      String cpf = textCPF.getText();
-     
+     pessoa pessoinha = new pessoa();
+     pessoinha.setNome(nome);
+     pessoinha.setCpf(cpf);
+     pessoinha.setIdade(idade);
         telaLista.setVisible(true);
-        telaLista.atualizarPessoa(id, nome, cpf, idade);
-        telaLista.ListarPessoas();
-        
+
+         bd banco = new bd();
+            banco.update(pessoinha, Integer.parseInt(textid.getText()));
+                    telaLista.ListarPessoas();
         dispose();
-            
+          
               
     }//GEN-LAST:event_botaoatualizarActionPerformed
 
@@ -142,7 +166,7 @@ public class atualizar extends javax.swing.JFrame {
         textNome.setText(telaLista.getListadepessoa() .get(combopessoa.getSelectedIndex()).getNome() );
                 textIdade.setText(telaLista.getListadepessoa() .get(combopessoa.getSelectedIndex()).getIdade()+"" );
         textCPF.setText(telaLista.getListadepessoa() .get(combopessoa.getSelectedIndex()).getCpf() );
-
+          textid.setText(telaLista.getListadepessoa() .get(combopessoa.getSelectedIndex()).getId()+"");
     }//GEN-LAST:event_combopessoaActionPerformed
 
     /**
@@ -183,11 +207,13 @@ public class atualizar extends javax.swing.JFrame {
     private javax.swing.JButton botaoatualizar;
     private javax.swing.JComboBox<String> combopessoa;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField textCPF;
     private javax.swing.JTextField textIdade;
     private javax.swing.JTextField textNome;
+    private javax.swing.JTextField textid;
     // End of variables declaration//GEN-END:variables
 }
